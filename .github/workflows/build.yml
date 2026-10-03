@@ -1,0 +1,19 @@
+name: Managed build and tests
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  managed-tests:
+    runs-on: windows-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile service and run managed regression suites
+        shell: pwsh
+        run: ./MultiplayerDev/test-managed.ps1
